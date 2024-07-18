@@ -1,0 +1,169 @@
+*** SPICE deck for cell 4-bit_comp{lay} from library ComparatorLib
+*** Created on Sat May 18, 2024 15:27:01
+*** Last revised on Sat May 18, 2024 20:24:48
+*** Written on Sat May 18, 2024 20:24:52 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT ComparatorLib__1-bit_comp FROM CELL 1-bit_comp{lay}
+.SUBCKT ComparatorLib__1-bit_comp A B E G gnd L vdd
+Mnmos@0 net@101 A G gnd NMOS L=0.6U W=3U AS=8.1P AD=7.2P PS=12.6U PD=11.6U
+Mnmos@1 gnd A net@125 gnd NMOS L=0.6U W=3U AS=7.35P AD=7.5P PS=11.7U PD=11.8U
+Mnmos@2 gnd B net@101 gnd NMOS L=0.6U W=3U AS=7.2P AD=7.5P PS=11.6U PD=11.8U
+Mnmos@3 gnd A net@189 gnd NMOS L=0.6U W=3U AS=7.35P AD=7.5P PS=11.7U PD=11.8U
+Mnmos@4 net@189 B L gnd NMOS L=0.6U W=3U AS=8.1P AD=7.35P PS=12.6U PD=11.7U
+Mnmos@5 gnd net@96 E gnd NMOS L=0.6U W=3U AS=8.1P AD=7.5P PS=12.6U PD=11.8U
+Mnmos@6 net@125 B net@96 gnd NMOS L=0.6U W=3U AS=8.1P AD=7.35P PS=12.6U PD=11.7U
+Mpmos@0 gnd A G vdd PMOS L=0.6U W=6U AS=8.1P AD=7.5P PS=12.6U PD=11.8U
+Mpmos@1 vdd A net@125 vdd PMOS L=0.6U W=6U AS=7.35P AD=10.8P PS=11.7U PD=15.6U
+Mpmos@2 vdd B net@101 vdd PMOS L=0.6U W=6U AS=7.2P AD=10.8P PS=11.6U PD=15.6U
+Mpmos@3 vdd A net@189 vdd PMOS L=0.6U W=6U AS=7.35P AD=10.8P PS=11.7U PD=15.6U
+Mpmos@4 gnd B L vdd PMOS L=0.6U W=6U AS=8.1P AD=7.5P PS=12.6U PD=11.8U
+Mpmos@5 vdd net@96 E vdd PMOS L=0.6U W=6U AS=8.1P AD=10.8P PS=12.6U PD=15.6U
+Mpmos@6 A B net@96 vdd PMOS L=0.6U W=6U AS=8.1P AD=10.8P PS=12.6U PD=15.6U
+
+* Spice Code nodes in cell cell '1-bit_comp{lay}'
+*vdd vdd 0 DC 5
+*vina A 0 pwl 10n 0 20n 0 50n 0 60n 0
+*vinb B 0 pwl 10n 0 20n 5 50n 5 60n 0
+*.measure tran tfg trig v(G) val=4.5 fall=1 td=8ns trag v(G) val=0.5 fall=1
+*.measure tran trg trig v(G) val=0.5 rais=1 td=50ns trag v(G) val=4.5 rais=1
+*.measure tran tfe trig v(E) val=4.5 fall=1 td=8ns trag v(E) val=0.5 fall=1
+*.measure tran tre trig v(E) val=0.5 rais=1 td=50ns trag v(E) val=4.5 rais=1
+*.measure tran tfl trig v(L) val=4.5 fall=1 td=8ns trag v(L) val=0.5 fall=1
+*.measure tran trl trig v(L) val=0.5 rais=1 td=50ns trag v(L) val=4.5 rais=1
+*.tran 0 0.1us
+*.include C:\Users\Laptop Center\Desktop\New folder (2)\Electric\C5_models.txt
+.ENDS ComparatorLib__1-bit_comp
+
+*** SUBCIRCUIT ComparatorLib__Inverter FROM CELL Inverter{lay}
+.SUBCKT ComparatorLib__Inverter A gnd vdd Y
+Mnmos@0 gnd A Y gnd NMOS L=0.6U W=3U AS=8.1P AD=5.85P PS=12.6U PD=9.9U
+Mpmos@0 vdd A Y vdd PMOS L=0.6U W=6U AS=8.1P AD=10.8P PS=12.6U PD=15.6U
+.ENDS ComparatorLib__Inverter
+
+*** SUBCIRCUIT ComparatorLib__AND3 FROM CELL AND3{lay}
+.SUBCKT ComparatorLib__AND3 A B C gnd vdd Y
+XInverter@0 net@1 gnd vdd Y ComparatorLib__Inverter
+Mnmos@0 net@0 C net@1 gnd NMOS L=0.6U W=9U AS=13.05P AD=20.925P PS=14.4U PD=13.65U
+Mnmos@1 net@38 B net@0 gnd NMOS L=0.6U W=9U AS=20.925P AD=18.9P PS=13.65U PD=13.2U
+Mnmos@2 gnd A net@38 gnd NMOS L=0.6U W=9U AS=18.9P AD=17.55P PS=13.2U PD=21.9U
+Mpmos@0 net@1 B vdd vdd PMOS L=0.6U W=6U AS=12.9P AD=13.05P PS=12.3U PD=14.4U
+Mpmos@1 vdd C net@1 vdd PMOS L=0.6U W=6U AS=13.05P AD=12.9P PS=14.4U PD=12.3U
+Mpmos@2 vdd A net@1 vdd PMOS L=0.6U W=6U AS=13.05P AD=12.9P PS=14.4U PD=12.3U
+
+* Spice Code nodes in cell cell 'AND3{lay}'
+*vdd vdd 0 DC 5
+*vina A 0 pwl 10n 0 20n 5 50n 5 60n 0
+*vinb B 0 pwl 10n 0 20n 5 50n 5 60n 0
+*vinc C 0 pwl 10n 0 20n 0 50n 0 60n 0
+*cloud Y 0 250fF
+*.measure tran tf trig v(Y) val=4.5 fall=1 td=8ns trag v(Y) val=0.5 fall=1
+*.measure tran tr trig v(Y) val=0.5 rais=1 td=50ns trag v(Y) val=4.5 rais=1
+*.tran 0 0.1us
+*.include C:\Users\Laptop Center\Desktop\New folder (2)\Electric\C5_models.txt
+.ENDS ComparatorLib__AND3
+
+*** SUBCIRCUIT ComparatorLib__AND4 FROM CELL AND4{lay}
+.SUBCKT ComparatorLib__AND4 A B C D gnd vdd Y
+XInverter@0 net@1 gnd vdd Y ComparatorLib__Inverter
+Mnmos@0 net@0 D net@1 gnd NMOS L=0.6U W=12U AS=14.94P AD=27.9P PS=13.86U PD=16.65U
+Mnmos@1 net@21 C net@0 gnd NMOS L=0.6U W=12U AS=27.9P AD=25.2P PS=16.65U PD=16.2U
+Mnmos@2 net@26 B net@21 gnd NMOS L=0.6U W=12U AS=25.2P AD=25.2P PS=16.2U PD=16.2U
+Mnmos@3 gnd A net@26 gnd NMOS L=0.6U W=12U AS=25.2P AD=23.4P PS=16.2U PD=27.9U
+Mpmos@0 vdd C net@1 vdd PMOS L=0.6U W=6U AS=14.94P AD=11.7P PS=13.86U PD=12.9U
+Mpmos@1 net@1 D vdd vdd PMOS L=0.6U W=6U AS=11.7P AD=14.94P PS=12.9U PD=13.86U
+Mpmos@2 net@1 B vdd vdd PMOS L=0.6U W=6U AS=11.7P AD=14.94P PS=12.9U PD=13.86U
+Mpmos@3 vdd A net@1 vdd PMOS L=0.6U W=6U AS=14.94P AD=11.7P PS=13.86U PD=12.9U
+
+* Spice Code nodes in cell cell 'AND4{lay}'
+*vdd vdd 0 DC 5
+*vina A 0 pwl 10n 0 20n 5 50n 5 60n 0
+*vinb B 0 pwl 10n 0 20n 5 50n 5 60n 0
+*vinc C 0 pwl 10n 0 20n 5 50n 5 60n 0
+*vind D 0 pwl 10n 0 20n 5 50n 5 60n 0
+*cloud Y 0 250fF
+*.measure tran tf trig v(Y) val=4.5 fall=1 td=8ns trag v(Y) val=0.5 fall=1
+*.measure tran tr trig v(Y) val=0.5 rais=1 td=50ns trag v(Y) val=4.5 rais=1
+*.tran 0 0.1us
+*.include C:\Users\Laptop Center\Desktop\New folder (2)\Electric\C5_models.txt
+.ENDS ComparatorLib__AND4
+
+*** SUBCIRCUIT ComparatorLib__AND FROM CELL AND{lay}
+.SUBCKT ComparatorLib__AND A B gnd vdd Y
+XInverter@0 net@17 gnd vdd Y ComparatorLib__Inverter
+Mnmos@1 net@16 B net@17 gnd NMOS L=0.6U W=6U AS=12.9P AD=13.95P PS=12.3U PD=10.65U
+Mnmos@2 gnd A net@16 gnd NMOS L=0.6U W=6U AS=13.95P AD=11.7P PS=10.65U PD=15.9U
+Mpmos@1 vdd A net@17 vdd PMOS L=0.6U W=6U AS=12.9P AD=10.8P PS=12.3U PD=15.6U
+Mpmos@2 net@17 B vdd vdd PMOS L=0.6U W=6U AS=10.8P AD=12.9P PS=15.6U PD=12.3U
+
+* Spice Code nodes in cell cell 'AND{lay}'
+*vdd vdd 0 DC 5
+*vina A 0 pwl 10n 0 20n 5 50n 5 60n 0
+*vinb B 0 pwl 10n 0 20n 5 50n 5 60n 0
+*cloud Y 0 250fF
+*.measure tran tf trig v(Y) val=4.5 fall=1 td=8ns trag v(Y) val=0.5 fall=1
+*.measure tran tr trig v(Y) val=0.5 rais=1 td=50ns trag v(Y) val=4.5 rais=1
+*.tran 0 0.1us
+*.include C:\Users\Laptop Center\Desktop\New folder (2)\Electric\C5_models.txt
+.ENDS ComparatorLib__AND
+
+*** SUBCIRCUIT ComparatorLib__OR FROM CELL OR{lay}
+.SUBCKT ComparatorLib__OR A B C D gnd vdd Y
+XInverter@0 net@0 gnd vdd Y ComparatorLib__Inverter
+Mnmos@0 net@0 D gnd gnd NMOS L=0.6U W=3U AS=6.075P AD=9.45P PS=8.55U PD=11.34U
+Mnmos@1 gnd C net@0 gnd NMOS L=0.6U W=3U AS=9.45P AD=6.075P PS=11.34U PD=8.55U
+Mnmos@2 net@0 B gnd gnd NMOS L=0.6U W=3U AS=6.075P AD=9.45P PS=8.55U PD=11.34U
+Mnmos@3 gnd A net@0 gnd NMOS L=0.6U W=3U AS=9.45P AD=6.075P PS=11.34U PD=8.55U
+Mpmos@0 net@2 D net@0 vdd PMOS L=0.6U W=12U AS=9.45P AD=25.2P PS=11.34U PD=16.2U
+Mpmos@1 net@18 C net@2 vdd PMOS L=0.6U W=12U AS=25.2P AD=26.1P PS=16.2U PD=16.35U
+Mpmos@2 net@21 B net@18 vdd PMOS L=0.6U W=12U AS=26.1P AD=26.1P PS=16.35U PD=16.35U
+Mpmos@3 vdd A net@21 vdd PMOS L=0.6U W=12U AS=26.1P AD=21.6P PS=16.35U PD=27.6U
+
+* Spice Code nodes in cell cell 'OR{lay}'
+*vdd vdd 0 DC 5
+*vina A 0 pwl 10n 0 20n 5 50n 5 60n 0
+*vinb B 0 pwl 10n 0 20n 0 50n 0 60n 0
+*vinc C 0 pwl 10n 0 20n 0 50n 0 60n 0
+*vind D 0 pwl 10n 0 20n 0 50n 0 60n 0
+*cloud Y 0 250fF
+*.measure tran tf trig v(Y) val=4.5 fall=1 td=8ns trag v(Y) val=0.5 fall=1
+*.measure tran tr trig v(Y) val=0.5 rais=1 td=50ns trag v(Y) val=4.5 rais=1
+*.tran 0 0.1us
+*.include C:\Users\Laptop Center\Desktop\New folder (2)\Electric\C5_models.txt
+.ENDS ComparatorLib__OR
+
+*** TOP LEVEL CELL: 4-bit_comp{lay}
+X_1-bit_co@0 A3 B3 net@2 net@268 gnd net@231 vdd ComparatorLib__1-bit_comp
+X_1-bit_co@1 A2 B2 net@81 net@72 gnd net@46 vdd ComparatorLib__1-bit_comp
+X_1-bit_co@2 A1 B1 net@118 net@107 gnd net@92 vdd ComparatorLib__1-bit_comp
+X_1-bit_co@3 A0 B0 net@199 net@192 gnd net@164 vdd ComparatorLib__1-bit_comp
+XAND3@0 net@2 net@81 net@92 gnd vdd net@248 ComparatorLib__AND3
+XAND3@1 net@2 net@81 net@107 gnd vdd net@287 ComparatorLib__AND3
+XAND4@1 net@2 net@81 net@118 net@164 gnd vdd net@257 ComparatorLib__AND4
+XAND4@2 net@2 net@81 net@118 net@192 gnd vdd net@295 ComparatorLib__AND4
+XAND4@3 net@2 net@81 net@118 net@199 gnd vdd E ComparatorLib__AND4
+XAND@0 net@2 net@46 gnd vdd net@239 ComparatorLib__AND
+XAND@1 net@2 net@72 gnd vdd net@279 ComparatorLib__AND
+XOR@0 net@257 net@248 net@239 net@231 gnd vdd L ComparatorLib__OR
+XOR@1 net@295 net@287 net@279 net@268 gnd vdd G ComparatorLib__OR
+
+* Spice Code nodes in cell cell '4-bit_comp{lay}'
+vdd vdd 0 DC 5
+vina0 A0 0 pwl 10n 0 20n 5 50n 5 60n 0
+vina1 A1 0 pwl 10n 0 20n 0 50n 0 60n 0
+vina2 A2 0 pwl 10n 0 20n 0 50n 0 60n 0
+vina3 A3 0 pwl 10n 0 20n 0 50n 0 60n 0
+vinb0 B0 0 pwl 10n 0 20n 5 50n 5 60n 0
+vinb1 B1 0 pwl 10n 0 20n 5 50n 5 60n 0
+vinb2 B2 0 pwl 10n 0 20n 0 50n 0 60n 0
+vinb3 B3 0 pwl 10n 0 20n 0 50n 0 60n 0
+.measure tran tfg trig v(G) val=4.5 fall=1 td=8ns trag v(G) val=0.5 fall=1
+.measure tran trg trig v(G) val=0.5 rais=1 td=50ns trag v(G) val=4.5 rais=1
+.measure tran tfe trig v(E) val=4.5 fall=1 td=8ns trag v(E) val=0.5 fall=1
+.measure tran tre trig v(E) val=0.5 rais=1 td=50ns trag v(E) val=4.5 rais=1
+.measure tran tfl trig v(L) val=4.5 fall=1 td=8ns trag v(L) val=0.5 fall=1
+.measure tran trl trig v(L) val=0.5 rais=1 td=50ns trag v(L) val=4.5 rais=1
+.tran 0 0.1us
+.include C:\Users\Laptop Center\Desktop\New folder (2)\Electric\C5_models.txt
+.END

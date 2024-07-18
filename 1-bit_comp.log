@@ -1,0 +1,39 @@
+Circuit: *** SPICE deck for cell 1-bit_comp{lay} from library ComparatorLib
+
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+Ignoring BSIM parameter XL
+Ignoring BSIM parameter XW
+vina: Removing PWL point (2e-08,0)
+Direct Newton iteration for .op point succeeded.
+
+
+Measurement "tfg" FAIL'ed
+
+Measurement "trg" FAIL'ed
+tfe=8.3665e-08 FROM 1.6335e-08 TO 1e-07
+tre=8.1462e-08 FROM 1.8538e-08 TO 1e-07
+
+Measurement "tfl" FAIL'ed
+
+Measurement "trl" FAIL'ed
+
+
+Date: Sat May 18 15:54:32 2024
+Total elapsed time: 0.321 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2170
+traniter = 2149
+tranpoints = 1054
+accept = 1054
+rejected = 0
+matrix size = 13
+fillins = 0
+solver = Normal
+Avg thread counts: 2.8/3.6/3.6/2.3
+Matrix Compiler1: 676 bytes object code size  0.4/1.1/[0.3]
+Matrix Compiler2: off  [0.3]/0.5/1.0
+

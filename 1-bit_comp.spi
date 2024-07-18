@@ -1,0 +1,36 @@
+*** SPICE deck for cell 1-bit_comp{lay} from library ComparatorLib
+*** Created on Fri May 17, 2024 21:18:58
+*** Last revised on Sat May 18, 2024 15:43:21
+*** Written on Sat May 18, 2024 15:54:31 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** TOP LEVEL CELL: 1-bit_comp{lay}
+Mnmos@0 net@101 A G gnd NMOS L=0.6U W=3U AS=8.1P AD=7.2P PS=12.6U PD=11.6U
+Mnmos@1 gnd A net@125 gnd NMOS L=0.6U W=3U AS=7.35P AD=7.5P PS=11.7U PD=11.8U
+Mnmos@2 gnd B net@101 gnd NMOS L=0.6U W=3U AS=7.2P AD=7.5P PS=11.6U PD=11.8U
+Mnmos@3 gnd A net@189 gnd NMOS L=0.6U W=3U AS=7.35P AD=7.5P PS=11.7U PD=11.8U
+Mnmos@4 net@189 B L gnd NMOS L=0.6U W=3U AS=8.1P AD=7.35P PS=12.6U PD=11.7U
+Mnmos@5 gnd net@96 E gnd NMOS L=0.6U W=3U AS=8.1P AD=7.5P PS=12.6U PD=11.8U
+Mnmos@6 net@125 B net@96 gnd NMOS L=0.6U W=3U AS=8.1P AD=7.35P PS=12.6U PD=11.7U
+Mpmos@0 gnd A G vdd PMOS L=0.6U W=6U AS=8.1P AD=7.5P PS=12.6U PD=11.8U
+Mpmos@1 vdd A net@125 vdd PMOS L=0.6U W=6U AS=7.35P AD=10.8P PS=11.7U PD=15.6U
+Mpmos@2 vdd B net@101 vdd PMOS L=0.6U W=6U AS=7.2P AD=10.8P PS=11.6U PD=15.6U
+Mpmos@3 vdd A net@189 vdd PMOS L=0.6U W=6U AS=7.35P AD=10.8P PS=11.7U PD=15.6U
+Mpmos@4 gnd B L vdd PMOS L=0.6U W=6U AS=8.1P AD=7.5P PS=12.6U PD=11.8U
+Mpmos@5 vdd net@96 E vdd PMOS L=0.6U W=6U AS=8.1P AD=10.8P PS=12.6U PD=15.6U
+Mpmos@6 A B net@96 vdd PMOS L=0.6U W=6U AS=8.1P AD=10.8P PS=12.6U PD=15.6U
+
+* Spice Code nodes in cell cell '1-bit_comp{lay}'
+vdd vdd 0 DC 5
+vina A 0 pwl 10n 0 20n 0 50n 0 60n 0
+vinb B 0 pwl 10n 0 20n 5 50n 5 60n 0
+.measure tran tfg trig v(G) val=4.5 fall=1 td=8ns trag v(G) val=0.5 fall=1
+.measure tran trg trig v(G) val=0.5 rais=1 td=50ns trag v(G) val=4.5 rais=1
+.measure tran tfe trig v(E) val=4.5 fall=1 td=8ns trag v(E) val=0.5 fall=1
+.measure tran tre trig v(E) val=0.5 rais=1 td=50ns trag v(E) val=4.5 rais=1
+.measure tran tfl trig v(L) val=4.5 fall=1 td=8ns trag v(L) val=0.5 fall=1
+.measure tran trl trig v(L) val=0.5 rais=1 td=50ns trag v(L) val=4.5 rais=1
+.tran 0 0.1us
+.include C:\Users\Laptop Center\Desktop\New folder (2)\Electric\C5_models.txt
+.END
